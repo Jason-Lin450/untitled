@@ -8,8 +8,12 @@ public class Main {
             boil++;
             System.out.println(boil);
         }
+        while (boil > 1) {
+            boil--;
+            System.out.println(boil);
+        }
         if (boil == 1) {
-            System.out.println(boil - 98347 + " is better than coil");
+            System.out.println(boil + " is better than coil");
         }
     }
 }

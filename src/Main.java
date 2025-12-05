@@ -5,29 +5,35 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> lines = getFileData("src/data");
-        int num = 50;
-        int pass = 0;
-        for (String line : lines) {
-            if (line.substring(0,1).equals("L")) {
-                num -= Integer.parseInt(line.substring(1));
-                while (num < 0) {
-                    num += 100;
-                    pass++;
-                }
-            } else {
-                num += Integer.parseInt(line.substring(1));
-                while (num > 99) {
-                    num -= 100;
-                    pass++;
-                }
-            }
-            if (num == 0) {
-                pass++;
-            }
+
+        // **** DO NOT EDIT ANYTHING HERE ****
+        ArrayList<String> fileData = getFileData("src/data");
+        int partOneAnswer = 0;
+        for (String batteries : fileData) {
+            int voltage = getLargestCombination(batteries);
+            partOneAnswer += voltage;
         }
-        System.out.println(pass);
+
+        System.out.println("Part one answer: " + partOneAnswer);
     }
+
+    // COMPLETE THIS METHOD!
+    public static int getLargestCombination(String batteries) {
+        String largestCombination = "9";
+        int largest;
+        for (int n = 1; n <= 12; n++) {
+            largest = 0;
+            for (int i = batteries.indexOf(largestCombination.substring(n - 1, n)) + 1; i < batteries.length(); i++) {
+                if (largest < Integer.parseInt(batteries.substring(i, i + 1))) {
+                    largest = Integer.parseInt(batteries.substring(i, i + 1));
+                }
+            }
+            largestCombination += largest;
+        }
+        return Integer.parseInt(largestCombination);
+    }
+
+
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {
